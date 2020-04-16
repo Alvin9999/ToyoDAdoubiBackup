@@ -69,7 +69,7 @@ check_pid(){
 	PID=$(ps -ef| grep "daze"| grep -v grep| grep -v "daze.sh"| grep -v "init.d"| grep -v "service"| awk '{print $2}')
 }
 check_new_ver(){
-	new_ver=$(wget --no-check-certificate -qO- -t1 -T3 https://api.github.com/repos/mohanson/daze/releases| grep "tag_name"| head -n 1| awk -F ":" '{print $2}'| sed 's/\"//g;s/,//g;s/ //g')
+	new_ver=$(wget --no-check-certificate -qO- -t1 -T3 https://api.github.com/repos/mohanson/daze/releases1| grep "tag_name"| head -n 1| awk -F ":" '{print $2}'| sed 's/\"//g;s/,//g;s/ //g')
 	if [[ -z ${new_ver} ]]; then
 		echo -e "${Error} DAZE 最新版本获取失败，请手动获取最新版本号[ https://github.com/mohanson/daze/releases ]"
 		read -e -p "请输入版本号 [ 格式如 2018.10.15 ] :" new_ver
@@ -108,9 +108,9 @@ Download(){
 	else
 		bit="arm"
 	fi
-	wget --no-check-certificate -N "https://github.com/mohanson/daze/releases/download/${new_ver}/daze_linux_${bit}.zip"
-	[[ ! -e "daze_linux_${bit}.zip" ]] && echo -e "${Error} DAZE 下载失败 !" && rm -rf "${Folder}" && exit 1
-	mv "daze_linux_${bit}.zip" "daze"
+	wget --no-check-certificate -N "https://github.com/mohanson/daze/releases/download/${new_ver}/daze_linux_${bit}"
+	[[ ! -e "daze_linux_${bit}" ]] && echo -e "${Error} DAZE 下载失败 !" && rm -rf "${Folder}" && exit 1
+	mv "daze_linux_${bit}" "daze"
 	[[ ! -e "daze" ]] && echo -e "${Error} DAZE 重命名失败 !" && rm -rf "${Folder}" && exit 1
 	chmod +x daze
 	echo "${new_ver}" > ${Now_ver_File}
