@@ -109,8 +109,8 @@ Download(){
 		bit="arm"
 	fi
 	wget --no-check-certificate -N "https://github.com/mohanson/daze/releases/download/${new_ver}/daze_linux_${bit}.zip"
-	[[ ! -e "daze_linux_${bit}" ]] && echo -e "${Error} DAZE 下载失败 !" && rm -rf "${Folder}" && exit 1
-	mv "daze_linux_${bit}" "daze"
+	[[ ! -e "daze_linux_${bit}.zip" ]] && echo -e "${Error} DAZE 下载失败 !" && rm -rf "${Folder}" && exit 1
+	mv "daze_linux_${bit}.zip" "daze"
 	[[ ! -e "daze" ]] && echo -e "${Error} DAZE 重命名失败 !" && rm -rf "${Folder}" && exit 1
 	chmod +x daze
 	echo "${new_ver}" > ${Now_ver_File}
